@@ -16,18 +16,11 @@ dependencyResolutionManagement {
 rootProject.name = "DemoApp"
 include ':app'
 
-
 // Define the SDK directory (pointing to the root of the library project)
 def sdkDir = new File(System.getProperty('user.home') + '/ortto/android-sdk/messaging')
 
-// Log the directory path
-println "Ortto SDK directory: ${sdkDir.absolutePath}"
-
-// Verify if the directory exists
-if (!sdkDir.exists()) {
-    throw new GradleException("Ortto SDK directory does not exist: ${sdkDir.absolutePath}")
+if (sdkDir.exists()) {
+    include ':ortto-sdk'
+    project(':ortto-sdk').projectDir = sdkDir
 }
 
-// Add these lines
-include ':ortto-sdk'
-project(':ortto-sdk').projectDir = sdkDir
